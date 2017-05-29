@@ -231,6 +231,7 @@
                     console.log(this.data.favorites)
                     var c = this.data.currentUser.uid;
                     console.log(c,activity_id)
+                    console.log(favoritesRef.child(c))
                     if(favoritesRef.child(c) === null){
                         favoritesRef.child(c).child(activity_id).set(this.data.favorites[activity_id] ?  false : true)
                     }
