@@ -231,7 +231,12 @@
                     console.log(this.data.favorites)
                     var c = this.data.currentUser.uid;
                     console.log(c,activity_id)
-                    favoritesRef.child(c).update(activity_id)
+                    if(favoritesRef.child(c) === null){
+                        favoritesRef.child(c).child(activity_id).set(this.data.favorites[activity_id] ?  false : true)
+                    }
+                    else{
+                        favoritesRef.child(c).child(activity_id).update(this.data.favorites[activity_id] ?  false : true)
+                    }
                 },
 
                 // C , R , D
