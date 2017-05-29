@@ -49,7 +49,8 @@
                         <dd>{{activity.address}}</dd>
                     </dl>
                     <footer>
-                        <span v-if="data.currentUser" class="bn glyphicon glyphicon-pencil" @click="editorEditActivity( activity_id , activity )" data-toggle="modal" data-target="#activityEditor"></span>
+                        <span v-if="data.currentUser" class="bn glyphicon glyphicon-pencil" @click="editorEditActivity( activity_id , activity )"
+                            data-toggle="modal" data-target="#activityEditor"></span>
                         <span v-if="data.currentUser" class="bn glyphicon glyphicon-remove" @click="removeActivity( activity_id )"></span>
                     </footer>
                 </article>
@@ -226,7 +227,8 @@
 
                 toggle_like: function (activity_id) {
                     // ASN REQ 4 : update favoritesRef at `currentUser.uid ` at `activity_id` to true
-
+                    this.$set(this.data.favorite, activity_id, this.data.favorite[activity_id] ? false : true)
+                    console.log(this.data.favorite)
                 },
 
                 // C , R , D
