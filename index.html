@@ -237,7 +237,7 @@
                         }).catch(errorCallback)
                     } else {
                         this.$set(this.data.favorites, activity_id, this.data.favorites[activity_id] ? false : true)
-                        favoritesRef.child("fav").update(this.data.favorites[activity_id] ? true : false)
+                        favoritesRef.update(this.data.favorites[activity_id] ? true : false)
                     }
 
                 },
