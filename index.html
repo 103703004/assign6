@@ -232,11 +232,11 @@
                         this.$set(this.data.favorites, activity_id, this.data.favorites[activity_id] ? false : true)
                         favoritesRef.push({
                             user_uid: this.data.currentUser,
-                            activity_id: this.data.favorites[activity_id] ? false : true,
+                            activity_id: this.data.favorites[activity_id] ? true : false,
                         }).catch(errorCallback)
                     } else {
                         this.$set(this.data.favorites, activity_id, this.data.favorites[activity_id] ? false : true)
-                        favoritesRef.child(activity_id).update(this.data.favorites[activity_id] ? false : true)
+                        favoritesRef.child(activity_id).update(this.data.favorites[activity_id] ? true : false)
                     }
 
                 },
