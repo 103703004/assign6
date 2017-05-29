@@ -228,13 +228,14 @@
                 toggle_like: function (activity_id) {
                     // ASN REQ 4 : update favoritesRef at `currentUser.uid ` at `activity_id` to true
                     console.log(this.data.favorites[activity_id])
-                    if (this.data.favorites[activity_id] === null) {
+                    if (this.data.favorites[activity_id] === undefined) {
                         this.$set(this.data.favorites, activity_id, this.data.favorites[activity_id] ? false : true)
                         favoritesRef.push({
                             user_uid: this.data.currentUser,
                             activity_id: this.data.favorites[activity_id] ? false : true,
                         }).catch(errorCallback)
                     } else {
+                        this.$set(this.data.favorites, activity_id, this.data.favorites[activity_id] ? false : true)
                         favoritesRef.child(activity_id).update(this.data.favorites[activity_id] ? false : true)
                     }
 
