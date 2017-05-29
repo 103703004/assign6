@@ -231,12 +231,13 @@
                     if (this.data.favorites[activity_id] === undefined) {
                         this.$set(this.data.favorites, activity_id, this.data.favorites[activity_id] ? false : true)
                         favoritesRef.push({
-                            user_uid: this.data.currentUser.uid,
-                            activity_id: this.data.favorites[activity_id] ? true : false,
+                            user_uid: this.data.currentUser["uid"],
+                            activity_id: activity_id,
+                            fav: this.data.favorites[activity_id] ? true : false,
                         }).catch(errorCallback)
                     } else {
                         this.$set(this.data.favorites, activity_id, this.data.favorites[activity_id] ? false : true)
-                        favoritesRef.child(activity_id).update(this.data.favorites[activity_id] ? true : false)
+                        favoritesRef.child(fav).update(this.data.favorites[activity_id] ? true : false)
                     }
 
                 },
