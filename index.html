@@ -231,7 +231,7 @@
                     console.log(this.data.favorites)
                     var c = this.data.currentUser.uid;
                     console.log(c,activity_id)
-                    favoritesRef.child(c).child(activity_id).update(this.data.favorites[activity_id] ?  false : true)
+                    favoritesRef.child(c).update(activity_id)
                 },
 
                 // C , R , D
