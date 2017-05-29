@@ -208,7 +208,7 @@
                     if (this.editor.activity_id === null) {
                         // ASN REQ 2 : this means we are creating new activity
                         // you should use one of the functions `updateActivity or createActivity` below
-                        console.log(this.editor)
+                        //console.log(this.editor)
                         //createActivity(this.editor.activity)
                         activitiesRef.push({
                             address: this.editor.activity.address,
@@ -229,7 +229,7 @@
                     // ASN REQ 4 : update favoritesRef at `currentUser.uid ` at `activity_id` to true
                     this.$set(this.data.favorites, activity_id, this.data.favorites[activity_id] ?  false : true)
                     console.log(this.data.favorites)
-                    var c = this.data.currentUser;
+                    var c = this.data.currentUser.uid;
                     console.log(c,activity_id)
                     favoritesRef.child(c).child(activity_id).update(this.data.favorites[activity_id] ?  false : true)
                 },
