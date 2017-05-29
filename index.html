@@ -204,7 +204,7 @@
 
                 // ASN REQ 2 HINT : if `this.editor.activity_id` equals null , it means the editor is creating a new activity!!
                 editorSave: function () {
-                    console.log(this.editor.activity_id)
+                    //console.log(this.editor.activity_id)
                     if (this.editor.activity_id === null) {
                         // ASN REQ 2 : this means we are creating new activity
                         // you should use one of the functions `updateActivity or createActivity` below
@@ -227,8 +227,8 @@
 
                 toggle_like: function (activity_id) {
                     // ASN REQ 4 : update favoritesRef at `currentUser.uid ` at `activity_id` to true
-                    console.log(this.data.favorites.activity_id)
-                    if (this.data.favorites.activity_id === undefined) {
+                    console.log(this.data.favorites[activity_id])
+                    if (this.data.favorites[activity_id] === null) {
                         this.$set(this.data.favorites, activity_id, this.data.favorites[activity_id] ? false : true)
                         favoritesRef.push({
                             user_uid: this.data.currentUser,
