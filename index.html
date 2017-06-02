@@ -228,8 +228,21 @@
                 toggle_like: function (activity_id) {
                     // ASN REQ 4 : update favoritesRef at `currentUser.uid ` at `activity_id` to true
                     //this.$set(this.data.favorites, activity_id, this.data.favorites[activity_id] ? false : true)
-                    console.log(this.data.favorites[activity_id])
+                    //console.log(this.data.favorites[activity_id])
+                    //console.log(this.data.currentUser.uid)
+                    if(this.data.favorites == null){
+                      favoritesRef.child(this.data.currentUser.uid).child(activity_id).set(false).catch(errorCallback);
+                    }
+
+                    /*
+                    if(this.data.favorites[activity_id]){
+                      favoritesRef.child(this.data.currentUser.uid).child(activity_id).set(true).catch(errorCallback);
+                    }else{
+                      favoritesRef.child(this.data.currentUser.uid).child(activity_id).set(false).catch(errorCallback);
+                    }*/
+                    //favoritesRef.child(this.data.currentUser.uid).update(activity_id).catch(errorCallback)
                     favoritesRef.child(this.data.currentUser.uid).child(activity_id).set(this.data.favorites[activity_id] ? false : true).catch(errorCallback);
+
                 },
 
                 // C , R , D
@@ -275,6 +288,7 @@
                         var userData = user.toJSON();
                         // update vue to login status
                         vm.$set(vm.data, "currentUser", userData)
+                        //favoritesRef.child(vm.data.currentUser.uid).update(activity_id).catch(errorCallback)
                         // ASN REQ 4 :
                         // listen on chages on favorite data of currentUser , and set it to vm.data.currentUser
                         console.log(vm.data.currentUser.uid);
