@@ -209,13 +209,13 @@
                         // ASN REQ 2 : this means we are creating new activity
                         // you should use one of the functions `updateActivity or createActivity` below
                         //console.log(this.editor)
-                        //this.methods.createActivity(this.editor.activity)
-                        activitiesRef.push({
+                        this.createActivity(this.editor.activity)
+                        /*activitiesRef.push({
                             address: this.editor.activity.address,
                             price: this.editor.activity.price,
                             time: this.editor.activity.time,
                             title: this.editor.activity.title
-                        }).catch(errorCallback)
+                        }).catch(errorCallback)*/
                     } else {
                         // ASN REQ 2 : this means we should UPDATE the activity whose id is `activity_id` , with this.editor.activity
                         // you should use one of the functions `updateActivity or createActivity` below
