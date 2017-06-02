@@ -219,16 +219,16 @@
                     } else {
                         // ASN REQ 2 : this means we should UPDATE the activity whose id is `activity_id` , with this.editor.activity
                         // you should use one of the functions `updateActivity or createActivity` below
-                        //updateActivity(this.editor.activity_id,this.editor.activity);
-                        activitiesRef.child(this.editor.activity_id).update(this.editor.activity).catch(errorCallback)
+                        this.updateActivity(this.editor.activity_id, this.editor.activity);
+                        //activitiesRef.child(this.editor.activity_id).update(this.editor.activity).catch(errorCallback)
                     }
                     $("#activityEditor").modal("hide")
                 },
 
                 toggle_like: function (activity_id) {
                     // ASN REQ 4 : update favoritesRef at `currentUser.uid ` at `activity_id` to true
-                    this.$set(this.data.favorites, activity_id, this.data.favorites[activity_id] ? false : true)
-                    //favoritesRef.child(this.data.currentUser.uid).child(activity_id).update(true);
+                    //this.$set(this.data.favorites, activity_id, this.data.favorites[activity_id] ? false : true)
+                    favoritesRef.child(this.data.currentUser.uid).child(activity_id).update(this.data.favorites[activity_id] ? false : true).catch(errorCallback);
                 },
 
                 // C , R , D
@@ -276,9 +276,12 @@
                         vm.$set(vm.data, "currentUser", userData)
                         // ASN REQ 4 :
                         // listen on chages on favorite data of currentUser , and set it to vm.data.currentUser
-
-                    // else : not login : set vm.data.currentUser to null
-                    } else {
+                        favoritesRef.on("value", function (dataSnapshot) {
+                            var msg = dataSnapshot.val();
+                            console.log(msg);
+                            vm.data.favorites = msg;
+                        })
+                    } else {// else : not login : set vm.data.currentUser to null
                         // update vue to logout status
                         vm.$set(vm.data, "currentUser", null)
 
