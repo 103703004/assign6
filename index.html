@@ -209,7 +209,7 @@
                         // ASN REQ 2 : this means we are creating new activity
                         // you should use one of the functions `updateActivity or createActivity` below
                         //console.log(this.editor)
-                        //createActivity(this.editor.activity)
+                        //this.methods.createActivity(this.editor.activity)
                         activitiesRef.push({
                             address: this.editor.activity.address,
                             price: this.editor.activity.price,
@@ -227,20 +227,8 @@
 
                 toggle_like: function (activity_id) {
                     // ASN REQ 4 : update favoritesRef at `currentUser.uid ` at `activity_id` to true
-                    console.log(this.data.favorites[activity_id])
-                    if (this.data.favorites[activity_id] === undefined) {
-                        //下行是一定放這裡的
-                        this.$set(this.data.favorites, activity_id, this.data.favorites[activity_id] ? false : true)
-                        favoritesRef.push({
-                            user_uid: this.data.currentUser["uid"],
-                            activity_id: activity_id,
-                            fav: this.data.favorites[activity_id] ? true : false,
-                        }).catch(errorCallback)
-                    } else {
-                        this.$set(this.data.favorites, activity_id, this.data.favorites[activity_id] ? false : true)
-                        favoritesRef.update(this.data.favorites[activity_id] ? true : false)
-                    }
-
+                    this.$set(this.data.favorites, activity_id, this.data.favorites[activity_id] ? false : true)
+                    //favoritesRef.child(this.data.currentUser.uid).child(activity_id).update(true);
                 },
 
                 // C , R , D
@@ -286,18 +274,16 @@
                         var userData = user.toJSON();
                         // update vue to login status
                         vm.$set(vm.data, "currentUser", userData)
+                        // ASN REQ 4 :
+                        // listen on chages on favorite data of currentUser , and set it to vm.data.currentUser
+
+                    // else : not login : set vm.data.currentUser to null
                     } else {
                         // update vue to logout status
                         vm.$set(vm.data, "currentUser", null)
 
                     }
                 })
-                // ASN REQ 4 :
-                // listen on chages on favorite data of currentUser , and set it to vm.data.currentUser
-
-                // else : not login : set vm.data.currentUser to null
-
-
             }
         })
     </script>
