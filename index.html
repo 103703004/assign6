@@ -229,7 +229,7 @@
                     // ASN REQ 4 : update favoritesRef at `currentUser.uid ` at `activity_id` to true
                     //this.$set(this.data.favorites, activity_id, this.data.favorites[activity_id] ? false : true)
                     console.log(this.data.favorites[activity_id])
-                    favoritesRef.child(this.data.currentUser.uid).child(activity_id).update(this.data.favorites[activity_id] ? false : true).catch(errorCallback);
+                    favoritesRef.child(this.data.currentUser.uid).child(activity_id).set(this.data.favorites[activity_id] ? false : true).catch(errorCallback);
                 },
 
                 // C , R , D
@@ -259,7 +259,7 @@
                 var vm = this;
                 activitiesRef.on("value", function (dataSnapshot) {
                     var msg = dataSnapshot.val();
-                    console.log(msg);
+                    //console.log(msg);
                     vm.data.activities = msg;
                 })
 
@@ -277,9 +277,11 @@
                         vm.$set(vm.data, "currentUser", userData)
                         // ASN REQ 4 :
                         // listen on chages on favorite data of currentUser , and set it to vm.data.currentUser
-                        favoritesRef.on("value", function (dataSnapshot) {
+                        console.log(vm.data.currentUser.uid);
+                        favoritesRef.child(vm.data.currentUser.uid).on("value", function (dataSnapshot) {
                             var msg = dataSnapshot.val();
                             console.log(msg);
+                            //vm.$set(vm.data, "data.favorites", msg)
                             vm.data.favorites = msg;
                         })
                     } else {// else : not login : set vm.data.currentUser to null
